@@ -1,19 +1,20 @@
 
-const input = document.createElement("input");
-const startButton = document.createElement("button");
-startButton.innerText = "submit";
-startButton.setAttribute("id", "start");
-input.setAttribute("id", "username");
-input.setAttribute("type", "text");
-input.setAttribute("placeholder", "type here")
+const root = document.querySelector("body");
+
 let log = document.getElementById("log");
 let welcome = "hello what is your name"
 let playerName;
 
 
 function intro() {
-  document.body.appendChild(input);
-  document.body.appendChild(startButton);
+  const input = document.createElement("input");
+  const startButton = document.createElement("button");
+  startButton.innerText = "submit";
+  startButton.setAttribute("id", "start");
+  input.setAttribute("id", "username");
+  input.setAttribute("type", "text");
+  input.setAttribute("placeholder", "type here")
+  root.append(input, startButton);
 
   startButton.addEventListener('click', () => {
     playerName = document.getElementById("username").value;
@@ -24,8 +25,7 @@ function intro() {
     const notBTN = document.createElement("button");
     yestBTN.innerText = "yes";
     notBTN.innerText = "no";
-    document.body.appendChild(yestBTN);
-    document.body.appendChild(notBTN);
+    root.append(yestBTN, notBTN);
     notBTN.addEventListener('click', () => {
       yestBTN.remove();
       notBTN.remove();
