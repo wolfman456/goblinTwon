@@ -38,12 +38,41 @@ function intro() {
     });
   });
 }
+
 function optionOne() {
-  log.innerText = "GoodBy";
+  log.innerText = `GoodBye ${playerName}.`;
 }
 function optionTwo() {
-  log.innerText = "hello";
+  log.innerText = 
+  `You wake up in front of a cave ${playerName}.
+  There is a terrible smell coming from the cave.
+  Do you enter the cave or walk away.`
+  const cave = document.createElement('button');
+  cave.innerText = "cave";
+  const walk = document.createElement('button');
+  walk.innerText = "walk away";
+ 
+  cave.addEventListener('click', ()=>{
+    cave.remove();
+    walk.remove();
+    cave();
+  });
+
+  walk.addEventListener('click', () =>{
+    cave.remove();
+    walk.remove();
+    walk();
+  });
 }
+
+function cave(){
+
+}
+
+function walk(){
+
+}
+
 function mainLoop() {
   log.innerText = welcome;
   intro();
