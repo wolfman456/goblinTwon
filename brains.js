@@ -51,26 +51,31 @@ function optionTwo() {
   cave.innerText = "cave";
   const walk = document.createElement('button');
   walk.innerText = "walk away";
+  root.append(cave, walk);
  
   cave.addEventListener('click', ()=>{
     cave.remove();
     walk.remove();
-    cave();
+    enterCave();
   });
 
-  walk.addEventListener('click', () =>{
+  walk.addEventListener('click', ()=>{
     cave.remove();
     walk.remove();
-    walk();
+    leave(); 
   });
 }
 
-function cave(){
+function enterCave(){
 
 }
 
-function walk(){
-
+function leave(){
+  document.body.style.backgroundColor = "red";
+log.innerText = 
+`A goblin walks up behind you
+and hit you over the head with a rock.
+you are dead`
 }
 
 function mainLoop() {
@@ -81,4 +86,3 @@ function mainLoop() {
 }
 
 mainLoop();
-
