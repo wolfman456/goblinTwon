@@ -1,66 +1,46 @@
 
 const root = document.querySelector("body");
 const speed = 100;
-let mesaageArray = {
-  "message":["hello what is your name"],
-"nameMessage":[`Would you like to play a game ${playerName}?`]};
-// let mesaageArray = ["hello what is your name"];
-let playerName;
+let log = document.querySelector("#message");
+let mesaageArray = [`Would you like to play a game.`, `GoodBye.`, 
+`You wake up in front of a cave. Do you enter the cave or walk away.`,
+"A goblin hits you with a rock. You are dead",
+"You enter the cave and it forks to the left and the right, which path do you take."];
 let i = 0;
 let textPosition = 0;
 
 
 
 typewriter = () => {
-  document.querySelector("#message").innerHTML
-    = mesaageArray.message[i].substring(0, textPosition)
+  log.innerHTML
+    = mesaageArray[i].substring(0, textPosition)
     + "<span>\u25ae</span>";
-  if (textPosition++ != mesaageArray.message[i].length)
+  if (textPosition++ != mesaageArray[i].length)
     setTimeout(typewriter, speed);
 }
 
 function intro() {
-  const input = document.createElement("input");
-  const startButton = document.createElement("button");
-  startButton.innerText = "submit";
-  startButton.setAttribute("id", "start");
-  input.setAttribute("id", "username");
-  input.setAttribute("type", "text");
-  input.setAttribute("placeholder", "type here")
-  root.append(input, startButton);
-
-  startButton.addEventListener('click', () => {
-    i++
-    playerName = document.getElementById("username").value;
-    
-    input.remove();
-    startButton.remove();
-    const yestBTN = document.createElement("button");
-    const notBTN = document.createElement("button");
-    yestBTN.innerText = "yes";
-    notBTN.innerText = "no";
-    root.append(yestBTN, notBTN);
-    notBTN.addEventListener('click', () => {
-      yestBTN.remove();
-      notBTN.remove();
-      optionOne();
-    });
-    yestBTN.addEventListener('click', () => {
-      yestBTN.remove();
-      notBTN.remove();
-      optionTwo();
-    });
+  typewriter();
+  const yestBTN = document.createElement("button");
+  const notBTN = document.createElement("button");
+  yestBTN.innerText = "yes";
+  notBTN.innerText = "no";
+  root.append(yestBTN, notBTN);
+  notBTN.addEventListener('click', () => {
+    i = 1;
+    log.innerHTML = "";
+    typewriter();
+  });
+  yestBTN.addEventListener('click', () => {
+    i = 2;
+    yestBTN.remove();
+    notBTN.remove();
+    optionTwo();
   });
 }
 
-function optionOne() {
-  log.innerText = `GoodBye ${playerName}.`;
-}
 function optionTwo() {
-  log.innerText =
-    `You wake up in front of a cave ${playerName}.
-  There is a terrible smell coming from the cave.
-  Do you enter the cave or walk away.`
+  typewriter();
   const cave = document.createElement('button');
   cave.innerText = "cave";
   const walk = document.createElement('button');
@@ -81,18 +61,23 @@ function optionTwo() {
 }
 
 function enterCave() {
-  txt = "you enter the cave and smell something funny."
-  
+  i = 4;
+  typewriter();
+  const left = document.createElement("button");
+  const right = document.createElement("button");
+  left.innerText = "left";
+  right.innerText = "right";
+  root.append(left, right)
+  left.addEventListener("click", leave);
+  right.addEventListener("click", leave);
 
 }
 
 
 function leave() {
+  i=3;
+  typewriter();
   document.body.style.backgroundColor = "red";
-  log.innerText =
-    `A goblin walks up behind you
-and hit you over the head with a rock.
-you are dead`
   const playAgain = document.createElement('button');
   playAgain.innerText = "Play Again"
   root.append(playAgain);
@@ -102,15 +87,4 @@ you are dead`
   })
 
 }
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
-
-function mainLoop() {
-
-  typewriter();
-  intro();
-}
-mainLoop();
-
-// window.addEventListener("load", typewriter);
+intro();
