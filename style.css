@@ -5,6 +5,17 @@ body {
 }
 
 p {
-    color: white;
+    color: #00FF00;
 
+}
+
+span{
+    animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+    50%{
+        opacity: 0;
+    }
+    
 }
